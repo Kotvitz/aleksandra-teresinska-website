@@ -1,3 +1,4 @@
+import Footer from "./src/components/Footer";
 import Header from "./src/components/Header";
 import Hero from "./src/components/Hero";
 import SectionIntro from "./src/components/SectionIntro";
@@ -40,6 +41,8 @@ export default function Home() {
         icon={<Mail size={22} strokeWidth={2} />}
         href="/kontakt"
       />
+
+      <Footer/>
     </main>
   );
 }
