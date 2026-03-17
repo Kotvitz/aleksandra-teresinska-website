@@ -1,5 +1,3 @@
-import Footer from "./src/components/Footer";
-import Header from "./src/components/Header";
 import Hero from "./src/components/Hero";
 import SectionIntro from "./src/components/SectionIntro";
 import { User, Compass, Mail } from "lucide-react";
@@ -8,7 +6,6 @@ import { User, Compass, Mail } from "lucide-react";
 export default function Home() {
   return (
     <main className="bg-(--surface) text-(--text)">
-      <Header />
       <Hero />
 
       <SectionIntro
@@ -41,8 +38,6 @@ export default function Home() {
         icon={<Mail size={22} strokeWidth={2} />}
         href="/kontakt"
       />
-
-      <Footer/>
     </main>
   );
 }
