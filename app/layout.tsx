@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./src/components/Header";
 import Footer from "./src/components/Footer";
+import ScrollToTopButton from "./src/components/ui/ScrollToTopButton";
 
 export const metadata: Metadata = {
   title: "Aleksandra Teresińska | Nowa Nadzieja",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <ScrollToTopButton />
         <Footer />
       </body>
     </html>
