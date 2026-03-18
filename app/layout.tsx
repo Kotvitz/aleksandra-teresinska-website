@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from "./src/components/Header";
 import Footer from "./src/components/Footer";
 import ScrollToTopButton from "./src/components/ui/ScrollToTopButton";
+import CookieSettingsButton from "./src/components/ui/CookieSettingsButton";
+import ConsentScripts from "./src/components/cookies/ConsentScripts";
 
 export const metadata: Metadata = {
   title: "Aleksandra Teresińska | Nowa Nadzieja",
@@ -20,6 +22,8 @@ export default function RootLayout({
         <Header />
         {children}
         <ScrollToTopButton />
+        <CookieSettingsButton />
+        <ConsentScripts />
         <Footer />
       </body>
     </html>
