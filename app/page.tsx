@@ -1,43 +1,53 @@
 import Hero from "./src/components/Hero";
 import SectionIntro from "./src/components/SectionIntro";
 import { User, Compass, Mail } from "lucide-react";
+import { HomePage } from "@/sanity/lib/types";
+import { client } from "@/sanity/lib/client";
+import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
+const iconMap = {
+  user: <User size={22} strokeWidth={2} />,
+  compass: <Compass size={22} strokeWidth={2} />,
+  mail: <Mail size={22} strokeWidth={2} />,
+};
 
-export default function Home() {
+export default async function Home() {
+  const data = await client.fetch<HomePage>(HOME_PAGE_QUERY);
+
+  if (!data) {
+    throw new Error("Brak dokumentu 'homePage' w Sanity.");
+  }
+  
+
   return (
     <main className="bg-(--surface) text-(--text)">
-      <Hero />
-
-      <SectionIntro
-        id="o-mnie"
-        label="O mnie"
-        title="Kim jestem?"
-        description="Wierzę, że Polska może być krajem wolnych i odpowiedzialnych ludzi. Dlatego angażuję się w działalność publiczną i wspieram rozwiązania, które dają obywatelom więcej wolności, mniej biurokracji i większy wpływ na własne życie."
-        buttonText="Więcej"
-        href="/o-mnie"
-        icon={<User size={22} strokeWidth={2} />}
-        muted
+      <Hero
+        eyebrow={data.heroEyebrow}
+        title={data.heroTitle}
+        subtitle={data.heroSubtitle}
+        socialLinks={data.socialLinks}
+        imageUrl={
+          data?.heroImage
+            ? urlFor(data.heroImage).width(900).height(1100).url()
+            : undefined
+        }
+        imageAlt={data.heroImageAlt || data.heroTitle}
       />
 
-      <SectionIntro
-        id="wartosci"
-        label="Wartości"
-        title="Wolność, odpowiedzialność, rozwój"
-        description="W centrum mojej działalności jest wolność obywateli i silna gospodarka oparta na przedsiębiorczości. Popieram niższe podatki, prostsze prawo i państwo, które nie przeszkadza ludziom w pracy i realizowaniu własnych pomysłów."
-        buttonText="Więcej"
-        icon={<Compass size={22} strokeWidth={2} />}
-        href="/wartosci"
-      />
-
-      <SectionIntro
-        id="kontakt"
-        label="Kontakt"
-        title="Pozostańmy w kontakcie!"
-        description="Masz pytanie, propozycję współpracy lub chcesz podzielić się swoją opinią? Skontaktuj się bezpośrednio."
-        buttonText="Więcej"
-        icon={<Mail size={22} strokeWidth={2} />}
-        href="/kontakt"
-      />
+      {data.sections.map((section) => (
+        <SectionIntro
+          key={section.id}
+          id={section.id}
+          label={section.label}
+          title={section.title}
+          description={section.description}
+          buttonText={section.buttonText}
+          href={section.href}
+          icon={section.icon ? iconMap[section.icon] : undefined}
+          muted={section.muted}
+        />
+      ))}
     </main>
   );
 }

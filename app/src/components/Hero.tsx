@@ -7,35 +7,39 @@ import {
   SiYoutube,
 } from "react-icons/si";
 
-const socialLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61557471890058",
-    icon: SiFacebook
-  },
-  {
-    name: "X",
-    href: "https://x.com/A_Z_Teresinska",
-    icon: SiX
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/aleksandratee",
-    icon: SiInstagram,
-  },
-  {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@A_Z_Teresinska",
-    icon: SiTiktok,
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/@pannaTee",
-    icon: SiYoutube,
-  },
-];
+type SocialPlatform = "facebook" | "x" | "instagram" | "tiktok" | "youtube";
 
-export default function Hero() {
+type SocialLink = {
+  name: string;
+  href: string;
+  platform: SocialPlatform;
+};
+
+type HeroProps = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  socialLinks: SocialLink[];
+  imageUrl?: string;
+  imageAlt: string;
+};
+
+const iconMap = {
+  facebook: SiFacebook,
+  x: SiX,
+  instagram: SiInstagram,
+  tiktok: SiTiktok,
+  youtube: SiYoutube,
+};
+
+export default function Hero({
+  eyebrow,
+  title,
+  subtitle,
+  socialLinks,
+  imageUrl,
+  imageAlt,
+}: HeroProps) {
   return (
     <section
       id="hero"
@@ -44,20 +48,20 @@ export default function Hero() {
       <div className="mx-auto grid min-h-[88vh] max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-2 md:py-24">
         <div className="max-w-2xl">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-(--brand-primary)">
-            Strona oficjalna
+            {eyebrow}
           </p>
 
           <h1 className="text-4xl font-bold tracking-tight text-(--brand-primary) sm:text-5xl md:text-6xl">
-            Aleksandra Teresińska
+            {title}
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-8 text-(--text-muted)">
-            Przewodnicząca oddziału Nowej Nadziei w Pyrzycach 
+            {subtitle}
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {socialLinks.map((link) => {
-              const Icon = link.icon;
+              const Icon = iconMap[link.platform];
 
               return (
                 <a
@@ -90,8 +94,8 @@ export default function Hero() {
 
           <div className="relative overflow-hidden rounded-4xl border border-(--border) bg-(--surface-muted-strong) shadow-xl">
             <Image
-              src="/images/hero.webp"
-              alt="Aleksandra Teresińska"
+              src={imageUrl || "/images/hero.webp"}
+              alt={imageAlt}
               width={900}
               height={1100}
               priority
