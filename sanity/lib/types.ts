@@ -54,3 +54,42 @@ export type AboutPage = {
   heroImageAlt?: string;
   splitSections: AboutSplitSectionData[];
 };
+
+export type ValueGridIcon =
+  | "lightbulb"
+  | "briefcaseBusiness"
+  | "shieldCheck"
+  | "heart"
+  | "scale"
+  | "users";
+
+export type ValuesGridItem = {
+  icon: ValueGridIcon;
+  title: string;
+  description: string;
+};
+
+export type ValuesBottomSection = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+};
+
+export type ValuesSectionData = {
+  eyebrow: string;
+  title: string;
+  descriptionOne: string;
+  descriptionTwo: string;
+  muted?: boolean;
+};
+
+export type ValuesPage = {
+  heroEyebrow: string;
+  heroTitle: string;
+  heroDescription: string;
+  heroImageSrc?: string;
+  heroImage?: unknown;
+  heroImageAlt: string;
+  valuesGrid: ValuesGridItem[];
+  sections: ValuesSectionData[];
+};

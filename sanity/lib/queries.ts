@@ -47,3 +47,26 @@ export const ABOUT_PAGE_QUERY = groq`
     }
   }
 `
+
+export const VALUES_PAGE_QUERY = groq`
+  *[_type == "valuesPage"][0]{
+    heroEyebrow,
+    heroTitle,
+    heroDescription,
+    heroImageSrc,
+    heroImage,
+    heroImageAlt,
+    valuesGrid[]{
+      icon,
+      title,
+      description
+    },
+    sections[]{
+      eyebrow,
+      title,
+      descriptionOne,
+      descriptionTwo,
+      muted
+    }
+  }
+`;

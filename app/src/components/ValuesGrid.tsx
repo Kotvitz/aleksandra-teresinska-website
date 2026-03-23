@@ -1,3 +1,4 @@
+import { ValuesGridItem } from "@/sanity/lib/types";
 import {
   BriefcaseBusiness,
   Heart,
@@ -7,46 +8,20 @@ import {
   Lightbulb,
 } from "lucide-react";
 
-const values = [
-  {
-    icon: <Lightbulb size={22} strokeWidth={2} />,
-    title: "Wolność",
-    description:
-      "Wierzę w większą swobodę obywateli, prostsze prawo i ograniczenie zbędnych ingerencji państwa.",
-  },
-  {
-    icon: <BriefcaseBusiness size={22} strokeWidth={2} />,
-    title: "Przedsiębiorczość",
-    description:
-      "Szanuję pracę, inicjatywę i odpowiedzialność osób, które budują firmy i miejsca pracy.",
-  },
-  {
-    icon: <ShieldCheck size={22} strokeWidth={2} />,
-    title: "Bezpieczeństwo",
-    description:
-      "Bezpieczna przyszłość rodzin i dzieci jest dla mnie jedną z podstawowych spraw publicznych.",
-  },
-  {
-    icon: <Heart size={22} strokeWidth={2} />,
-    title: "Rodzina",
-    description:
-      "Rodzina, wychowanie i trwałe wartości mają ogromne znaczenie dla stabilnej przyszłości społeczeństwa.",
-  },
-  {
-    icon: <Scale size={22} strokeWidth={2} />,
-    title: "Odpowiedzialność",
-    description:
-      "Cenię konkret, uczciwość i odpowiedzialne podejście do spraw publicznych zamiast pustych deklaracji.",
-  },
-  {
-    icon: <Users size={22} strokeWidth={2} />,
-    title: "Blisko ludzi",
-    description:
-      "Ważne są dla mnie rozmowa z mieszkańcami, lokalne sprawy i realna obecność tam, gdzie potrzeba działania.",
-  },
-];
+type ValuesGridProps = {
+  values: ValuesGridItem[];
+};
 
-export default function ValuesGrid() {
+const iconMap = {
+  lightbulb: <Lightbulb size={22} strokeWidth={2} />,
+  briefcaseBusiness: <BriefcaseBusiness size={22} strokeWidth={2} />,
+  shieldCheck: <ShieldCheck size={22} strokeWidth={2} />,
+  heart: <Heart size={22} strokeWidth={2} />,
+  scale: <Scale size={22} strokeWidth={2} />,
+  users: <Users size={22} strokeWidth={2} />,
+};
+
+export default function ValuesGrid({values}: ValuesGridProps) {
   return (
     <section className="border-b border-(--border) bg-(--surface-muted)">
       <div className="mx-auto max-w-7xl px-6 py-20">
@@ -57,7 +32,7 @@ export default function ValuesGrid() {
               className="rounded-4xl border border-(--border) bg-(--surface) p-6 shadow-sm"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-(--surface-muted) text-(--brand-primary)">
-                {value.icon}
+                {iconMap[value.icon]}
               </div>
 
               <h2 className="mt-5 text-xl font-semibold text-(--brand-primary)">
