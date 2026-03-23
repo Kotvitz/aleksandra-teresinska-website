@@ -1,5 +1,3 @@
-// sanity/lib/types.ts
-
 export type SocialPlatform =
   | "facebook"
   | "x"
@@ -32,4 +30,27 @@ export type HomePage = {
   heroImageAlt?: string;
   socialLinks: SocialLink[];
   sections: HomeSection[];
+};
+
+export type AboutSplitSectionData = {
+  imageSrc: string;
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  image?: unknown;
+  imageAlt: string;
+  imageSide?: 'left' | 'right';
+  muted?: boolean;
+};
+
+export type AboutPage = {
+  heroEyebrow: string;
+  heroTitle: string;
+  heroIntro: string;
+  heroDescription: string;
+  heroButtonText: string;
+  heroButtonHref: string;
+  heroImage?: unknown;
+  heroImageAlt?: string;
+  splitSections: AboutSplitSectionData[];
 };

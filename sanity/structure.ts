@@ -1,5 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
-import {HomeIcon} from '@sanity/icons'
+import {HomeIcon, UserIcon} from '@sanity/icons'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -14,7 +14,18 @@ export const structure: StructureResolver = (S) =>
             .documentId('homePage')
             .title('Strona główna')
         ),
+
+      S.listItem()
+        .title('O mnie')
+        .icon(UserIcon)
+        .child(
+          S.document()
+            .schemaType('aboutPage')
+            .documentId('aboutPage')
+            .title('O mnie')
+        ),
+
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() !== 'homePage'
+        (item) => !['homePage', 'aboutPage'].includes(item.getId() || '')
       ),
     ])
