@@ -93,3 +93,26 @@ export type ValuesPage = {
   valuesGrid: ValuesGridItem[];
   sections: ValuesSectionData[];
 };
+
+export type ContactPage = {
+  introEyebrow: string;
+  introTitle: string;
+  introDescription: string;
+
+  infoEmailLabel: string;
+  infoEmail: string;
+  infoAddressLabel: string;
+  infoAddress: string;
+
+  formTitle: string;
+  formNamePlaceholder: string;
+  formEmailPlaceholder: string;
+  formSubjectPlaceholder: string;
+  formMessagePlaceholder: string;
+  formConsentText: string;
+  formRequiredFieldsText: string;
+  formSubmitText: string;
+  formSubmittingText: string;
+  formSuccessMessage: string;
+  formErrorMessage: string;
+};

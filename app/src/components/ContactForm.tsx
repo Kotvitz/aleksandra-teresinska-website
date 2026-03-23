@@ -4,9 +4,33 @@ import { useMemo, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-export default function ContactForm() {
-  const successMessage = "Dziękujemy! Wiadomość została wysłana.";
-  const errorMessage = "Nie udało się wysłać wiadomości. Spróbuj ponownie.";
+type ContactFormProps = {
+  title: string;
+  namePlaceholder: string;
+  emailPlaceholder: string;
+  subjectPlaceholder: string;
+  messagePlaceholder: string;
+  consentText: string;
+  requiredFieldsText: string;
+  submitText: string;
+  submittingText: string;
+  successMessage: string;
+  errorMessage: string;
+};
+
+export default function ContactForm({
+  title,
+  namePlaceholder,
+  emailPlaceholder,
+  subjectPlaceholder,
+  messagePlaceholder,
+  consentText,
+  requiredFieldsText,
+  submitText,
+  submittingText,
+  successMessage,
+  errorMessage,
+}: ContactFormProps) {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -69,7 +93,7 @@ export default function ContactForm() {
     <section className="bg-(--surface)">
       <div className="mx-auto max-w-3xl px-6 py-20">
         <h2 className="text-2xl font-bold text-(--brand-primary)">
-          Formularz kontaktowy
+          {title}
         </h2>
 
         <div className="mt-4 h-1 w-16 rounded-full bg-(--brand-accent)" />
@@ -94,7 +118,7 @@ export default function ContactForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               type="text"
-              placeholder="Imię i nazwisko (wymagane)"
+              placeholder={namePlaceholder}
               required
               className="w-full rounded-xl border border-(--border) px-4 py-3 outline-none focus:border-(--brand-primary)"
             />
@@ -106,7 +130,7 @@ export default function ContactForm() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Adres e-mail (wymagane)"
+              placeholder={emailPlaceholder}
               required
               className="w-full rounded-xl border border-(--border) px-4 py-3 outline-none focus:border-(--brand-primary)"
             />
@@ -117,7 +141,7 @@ export default function ContactForm() {
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              placeholder="Temat"
+              placeholder={subjectPlaceholder}
               className="w-full rounded-xl border border-(--border) px-4 py-3 outline-none focus:border-(--brand-primary)"
             />
 
@@ -126,7 +150,7 @@ export default function ContactForm() {
               name="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Twoja wiadomość (wymagane)"
+              placeholder={messagePlaceholder}
               rows={5}
               required
               className="w-full rounded-xl border border-(--border) px-4 py-3 outline-none focus:border-(--brand-primary)"
@@ -143,8 +167,7 @@ export default function ContactForm() {
                   className="mt-1 h-4 w-4 rounded border"
                 />
                 <span>
-                  Wyrażam zgodę na przetwarzanie moich danych osobowych wysłanych za pomocą
-                  formularza kontaktowego<span className="text-gray-500">*</span>.
+                  {consentText}<span className="text-gray-500">*</span>.
                 </span>
               </label>
             </div>
@@ -154,11 +177,11 @@ export default function ContactForm() {
               disabled={!isValid || status === "sending"}
               className="w-full rounded-full bg-(--brand-primary) cursor-pointer px-6 py-3 font-semibold text-white transition hover:opacity-90"
             >
-              {status === "sending" ? "Wysyłanie..." : "Wyślij wiadomość"}
+              {status === "sending" ? submittingText : submitText}
             </button>
 
             <p className="text-xs text-gray-500">
-              Pola oznaczone <span className="text-gray-500">*</span> są wymagane.
+              {requiredFieldsText}
             </p>
 
             {status === "success" && (

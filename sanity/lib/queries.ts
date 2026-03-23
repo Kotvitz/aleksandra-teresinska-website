@@ -70,3 +70,26 @@ export const VALUES_PAGE_QUERY = groq`
     }
   }
 `;
+
+export const CONTACT_PAGE_QUERY = groq`
+  *[_type == "contactPage"][0]{
+    introEyebrow,
+    introTitle,
+    introDescription,
+    infoEmailLabel,
+    infoEmail,
+    infoAddressLabel,
+    infoAddress,
+    formTitle,
+    formNamePlaceholder,
+    formEmailPlaceholder,
+    formSubjectPlaceholder,
+    formMessagePlaceholder,
+    formConsentText,
+    formRequiredFieldsText,
+    formSubmitText,
+    formSubmittingText,
+    formSuccessMessage,
+    formErrorMessage
+  }
+`;
